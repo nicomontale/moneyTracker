@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, FlatList, Modal} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, FlatList, Modal, ActivityIndicator} from 'react-native';
 import colors from './Colors';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {
@@ -15,12 +15,32 @@ import {
 import tempData from './tempData';
 import ToDoList from './components/toDoList';
 import AddListModal from './components/AddListModal';
-
+import Fire from './Fire'
 export default class App extends React.Component{
   state = {
     addTodoVisible: false,
-    lists : tempData
+    lists : [],
+    user: {},
+    loading: true
   }
+  componentDidMount() {
+    firebase = new Fire((error, user)=>{
+      if(error) {
+        return alert("Errore")
+      }
+
+      firebase.getLists(lists=> {
+        this.setState({lists, user}, ()=>{
+this.setState({loading: false})
+        })
+      })
+      this.setState({
+        user
+      })
+    }
+    );
+  }
+ 
   toggleAddTodoModal() {
     this.setState({
       addTodoVisible: !this.state.addTodoVisible
@@ -43,11 +63,21 @@ this.setState({
   })
   }
   render() {
+    if(this.state.loading) {
+      return(
+        <View style={styles.container}>
+        <ActivityIndicator size="large" color={colors.yellow}/>
+        </View>
+      )
+    }
 return (
+  
   <View style={styles.container}>
+  
   <Modal animationType="slide" visible={this.state.addTodoVisible} onRequestClose={()=> this.toggleAddTodoModal()}>
   <AddListModal closeModal={()=> this.toggleAddTodoModal()} addList={this.addList}/>
   </Modal>
+
 <View style={{flexDirection:"row"}}>
 
 <Text style={styles.title}>
@@ -63,7 +93,7 @@ Money <Text style={{fontWeight: "300", color:colors.white}}>Transactions</Text>
 </View>
 <View style={{height: 275, paddingLeft: 32}}>
 <FlatList data={this.state.lists} 
-keyExtractor={item=>item.name} 
+keyExtractor={item=>item.id.toString()} 
 horizontal={true} 
 showsHorizontalScrollIndicator={false}
 renderItem={({item})=> this.renderList(item)}
@@ -83,7 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent:"center",
-    backgroundColor: '#39CCCC'
+    backgroundColor: '#344955'
   },
   divider: {
     backgroundColor:colors.white,
@@ -93,7 +123,7 @@ const styles = StyleSheet.create({
     }, title : {
       fontSize: 38,
       fontWeight:"800",
-      color: colors.black,
+      color: 'yellow',
       paddingHorizontal: 64
     }, addList : {
       borderWidth: 3,

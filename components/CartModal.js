@@ -36,20 +36,21 @@ export default class CartModal extends Component {
           
             return (
                 <View style={styles.transactionsContainer}>
-                <TouchableOpacity onPress={()=>this.toggleCompleted(index)}>
+                <TouchableOpacity  onPress={()=>this.toggleCompleted(index)}>
                 <Icon2 name={transactions.compleated ? "ios-square" : "ios-square-outline"}size={24}
-                color={colors.white} style={{width: 32}}/>
+                color='#39CCCC' style={{width: 32}}/>
               
                 
                 </TouchableOpacity>
-               
+             
                 <Text style={[styles.todo, {textDecorationLine : transactions.compleated ? "line-through": "none", color: transactions.compleated ? colors.lightgray : colors.black }]}>
                 {transactions.where}</Text>
                 <Text style={[styles.todo, {textDecorationLine : transactions.compleated ? "line-through": "none", color: transactions.compleated ? colors.lightgray : colors.black }]}>
                    {transactions.title} €</Text>
                    <Icon name="delete" size={24}
-                color={colors.white} style={{width: 32}}/>
+                color='#39CCCC' style={{width: 32}}/>
                 </View>
+                
             )
         }
     render() {
@@ -69,21 +70,26 @@ export default class CartModal extends Component {
                 </View>
                 </View>
                 <View style={[styles.section, {flex:3}]}>
+                
                 <FlatList data={list.todos} renderItem={({item, index}) => this.renderTransactions(item, index)} 
-                keyExtractor={item=> item.title}
+                keyExtractor={(_, index)=> index.toString()}
+                vertical={true}
                 contentContainerStyle={{paddingHorizontal: 32, paddingVertical:64}}
                 showsVerticalScrollIndicator={false}
 
                 />
+                </View>
                 <KeyboardAvoidingView style={[styles.section, styles.footer]} behavior="padding">
-                <TextInput style={[styles.input, {borderColor: this.state.color}]} onChangeText={text =>  this.setState({
+
+                
+                <TextInput placeholder="Topic" placeholderTextColor=" rgba(255, 255, 255, 0.5)"  style={[styles.input, {borderColor: this.state.color}]} onChangeText={text =>  this.setState({
                     newTodo : text
                 })} value={this.state.newTodo}/>
-                <TextInput style={[styles.input, {borderColor: this.state.color}]} keyboardType={'numeric'} onChangeText={text =>  this.setState({
+                <TextInput placeholder="Money" placeholderTextColor=" rgba(255, 255, 255, 0.5)" style={[styles.input, {borderColor: this.state.color}]} keyboardType={'numeric'} onChangeText={text =>  this.setState({
                     newCash : text
                 })} value={this.state.newCash}/>
                 <TouchableOpacity style={[styles.addTransacions], {backgroundColor: this.state.color}} onPress={()=>this.addTransacions()}>
-                <Icon name="plus" size={16} color={Colors.white}/>
+                <Icon name="plus" size={16} style={{marginLeft:10}} color={Colors.white}/>
                 </TouchableOpacity>
                 </KeyboardAvoidingView>
                 
@@ -92,7 +98,7 @@ export default class CartModal extends Component {
          
                 
                 
-                </View>
+                
             </SafeAreaView>
             </KeyboardAvoidingView>
         )
@@ -103,9 +109,10 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center",
       alignItems : "center",
-      backgroundColor: '#39CCCC'
+      backgroundColor: '#344955'
       
    }, section : {
+    
        flex: 1,
        alignSelf: "stretch"
    }, header : {
@@ -116,7 +123,7 @@ const styles = StyleSheet.create({
    }, title : {
        fontSize : 30,
        fontWeight: "800",
-      color : colors.black
+      color : 'white'
    }, 
    count: {
        marginTop: 4,
@@ -132,11 +139,17 @@ const styles = StyleSheet.create({
    },
    input : {
       flex: 1,
-      height : 48,
       borderWidth: StyleSheet.hairlineWidth,
+      borderColor: Colors.white,
+      height: 48,
+      marginTop: 8,
       borderRadius: 6,
-      marginRight: 8,
-      paddingHorizontal: 8,
+      paddingHorizontal: 16,
+      fontSize: 18,
+      borderWidth: 2,
+      marginLeft: 5,
+      color: 'white'
+     
       
    },
    addTransacions: {
@@ -145,17 +158,26 @@ const styles = StyleSheet.create({
        alignItems: "center",
        justifyContent: "center"
    }, transactionsContainer: {
-       paddingVertical: 25,
-       paddingHorizontal: 25,
+  borderRadius: 10,
+    paddingVertical: 18,
+    paddingHorizontal:16,
        flexDirection: "row",
        alignItems: "center",
        justifyContent: "space-between",
        borderBottomColor: "white",
-       borderBottomWidth: 1
+       borderBottomWidth: 1,
+       backgroundColor: 'white',
+       marginBottom: 10,
+       shadowOpacity: 4,
+       shadowRadius: 0.5,
+       
    },
    todo : {
        color: Colors.black,
        fontWeight: "700",
        fontSize: 20
+   },  
+   todos : {
+   
    }
 })

@@ -38,7 +38,7 @@ export default class AddListModal extends Component {
             </TouchableOpacity>
             <View style={{alignSelf: "stretch", marginHorizontal: 32}}>
             <Text style={styles.title}>Create Cart</Text>
-            <TextInput style={styles.input} placeholder="Name" onChangeText={text=> this.setState({name: text})}/>
+            <TextInput style={styles.input} placeholder="Name" placeholderTextColor=" rgba(255, 255, 255, 0.5)" onChangeText={text=> this.setState({name: text})}/>
             <View style={{flexDirection:"row", justifyContent: "space-between", marginTop: 12}}>
             {this.renderColor()}
             </View>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: '#39CCCC'
+        backgroundColor: '#344955'
     }, title: {
         fontSize: 28,
         fontWeight: "800",
@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         paddingHorizontal: 16,
         fontSize: 18,
-        borderWidth: 2
+        borderWidth: 2,
+        color: 'white'
 
     }, createCart : {
         marginTop: 24,

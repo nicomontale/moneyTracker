@@ -8,18 +8,18 @@ export default tempData= [
         todos : [
     
             {
-                title:100,
-               where:"shop",
+                title:90,
+               where:"skate",
                 compleated: true
             },
             {
-                title:-100,
-                where:"shop",
+                title:-10.5,
+                where:"beer",
                 compleated: false
             },
             {
-                title:100,
-                where:"shop",
+                title:100.3,
+                where:"salary",
                 compleated: false
             },
         ]
@@ -32,18 +32,18 @@ export default tempData= [
         todos : [
     
             {
-                title:100,
-                where:"shop",
+                title:97,
+                where:"salary",
                 compleated: false
             },
             {
-                title:100,
-                where:"shop",
+                title:45.35,
+                where:"salary",
                 compleated: false
             },
             {
-                title:100,
-                where:"shop",
+                title:73.3,
+                where:"salary",
                 compleated: false
             },
         ]

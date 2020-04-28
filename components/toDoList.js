@@ -16,7 +16,7 @@ export default class toDoList extends React.Component {
     render() {
         const list = this.props.list;
         const completedCount = list.todos.filter(todo=> todo.compleated).length;
-        
+        const remainingCount = list.todos.length-completedCount;
         return (
             <View>
             <Modal animationType="slide" visible={this.state.showVisible} onRequestClose={()=>this.toggleVisible()}
@@ -29,7 +29,7 @@ export default class toDoList extends React.Component {
             {list.name}
             </Text>
             <View style={{alignItems:"center"}}>
-            <Text style={styles.count}>{completedCount}</Text>
+            <Text style={styles.count}>{remainingCount}</Text>
             <Text style={styles.subtitle}>Entrata</Text>
             </View>
             <View style={{alignItems:"center"}}>
