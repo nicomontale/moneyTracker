@@ -1,13 +1,13 @@
 import firebase from 'firebase';
 import '@firebase/firestore'
-const firebaseConfig = {
-    apiKey: "AIzaSyCJzL72tBR9_c8j4nj0gCXPsGsVrqGMAaA",
-    authDomain: "moneytracker-e9d7d.firebaseapp.com",
-    databaseURL: "https://moneytracker-e9d7d.firebaseio.com",
-    projectId: "moneytracker-e9d7d",
-    storageBucket: "moneytracker-e9d7d.appspot.com",
-    messagingSenderId: "666360611723",
-    appId: "1:666360611723:web:9add86580a49b009f7658e"
+var firebaseConfig = {
+    apiKey: "AIzaSyBGOilPNPseCx8CkhIyzY2xM_Nc7yDhJLs",
+    authDomain: "moneytransactions-601fa.firebaseapp.com",
+    databaseURL: "https://moneytransactions-601fa.firebaseio.com",
+    projectId: "moneytransactions-601fa",
+    storageBucket: "moneytransactions-601fa.appspot.com",
+    messagingSenderId: "719423944708",
+    appId: "1:719423944708:web:9f0ee5929014bfe6d9dd51"
 }
 class Fire {
     constructor(callback) {
@@ -32,11 +32,7 @@ class Fire {
     }
 
     getLists(callback) {
-        let ref = firebase
-        .firestore()
-        .collection('users')
-        .doc(this.userId)
-        .collection("lists");
+       let ref= this.ref.orderBy("name");
         this.unsubscribe = ref.onSnapshot(snapshot=> {
             lists =[];
              snapshot.forEach(doc=> {
@@ -48,6 +44,21 @@ class Fire {
     }
     get userId() {
        return firebase.auth().currentUser.uid;
+    }
+    updateList(list) {
+        let ref = this.ref;
+        ref.doc(list.id).update(list);
+    }
+    addList(list){
+let ref = this.ref;
+ref.add(list);
+    }    
+    get ref() {
+        return firebase
+        .firestore()
+        .collection('users')
+        .doc(this.userId)
+        .collection("lists");
     }
     detach() {
         this.unsubscribe();

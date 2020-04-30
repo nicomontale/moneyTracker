@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, FlatList, KeyboardAvoidingView, TextInput, Keyboard } from 'react-native'
+import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, FlatList, KeyboardAvoidingView, TextInput, Keyboard, Animated } from 'react-native'
 import  Icon from 'react-native-vector-icons/AntDesign';
 import  Icon2 from 'react-native-vector-icons/Ionicons';
 import Colors from '../Colors';
 import { gray, lightgray } from 'color-name';
+
 export default class CartModal extends Component {
     state= {
        newTodo: "",
@@ -35,6 +36,7 @@ export default class CartModal extends Component {
         renderTransactions=(transactions, index) =>{
           
             return (
+            
                 <View style={styles.transactionsContainer}>
                 <TouchableOpacity  onPress={()=>this.toggleCompleted(index)}>
                 <Icon2 name={transactions.compleated ? "ios-square" : "ios-square-outline"}size={24}
@@ -50,7 +52,19 @@ export default class CartModal extends Component {
                    <Icon name="delete" size={24}
                 color='#39CCCC' style={{width: 32}}/>
                 </View>
-                
+               
+               
+            )
+        }
+        rightActions=(dragX, index)=> {
+            return(
+                <TouchableOpacity>
+                <Animated.View>
+                <Animated.Text>
+                Delete
+                </Animated.Text>
+                </Animated.View>
+                </TouchableOpacity>
             )
         }
     render() {
@@ -58,10 +72,11 @@ export default class CartModal extends Component {
         const list = this.props.list;
         
         return (
+            
             <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
             <SafeAreaView style={styles.container}>
                 <TouchableOpacity style={{position: 'absolute', top: 64, right: 32, zIndex:10}}> 
-                <Icon name="close" size={24} color ={Colors.black} onPress={()=> this.props.closeModal()}/>
+                <Icon name="close" size={24} color ={Colors.white} onPress={()=> this.props.closeModal()}/>
                 </TouchableOpacity>
                 <View style={[styles.section, styles.header, {borderBottomColor: list.color}]}>
                 <View>
@@ -101,6 +116,7 @@ export default class CartModal extends Component {
                 
             </SafeAreaView>
             </KeyboardAvoidingView>
+        
         )
     }
 }

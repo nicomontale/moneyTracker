@@ -5,11 +5,11 @@ export default tempData= [
         id: 1,
         name:"PayPal",
         color:"yellow",
-        todos : [
+        todos: [
     
             {
-                title:90,
-               where:"skate",
+                title:-90,
+               where:"debts",
                 compleated: true
             },
             {
@@ -18,7 +18,7 @@ export default tempData= [
                 compleated: false
             },
             {
-                title:100.3,
+                title:1000.3,
                 where:"salary",
                 compleated: false
             },
@@ -29,7 +29,7 @@ export default tempData= [
         id: 2,
         name:"Unicredit",
         color:"lightblue",
-        todos : [
+        todos: [
     
             {
                 title:97,

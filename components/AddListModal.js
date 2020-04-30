@@ -4,7 +4,7 @@ import  Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../Colors';
 import tempData from '../tempData';
 export default class AddListModal extends Component {
-    backgroundColor= ["red", "orange","lightgray", "blue"]
+    backgroundColor= ["red", "orange","lightgray", "blue", "yellow"]
     state = {
         name: "",
         color: this.backgroundColor[1]
@@ -32,12 +32,12 @@ export default class AddListModal extends Component {
             <KeyboardAvoidingView style={styles.container} behavior="padding">
             
             <TouchableOpacity style={{position:"absolute", top:64, right:32}} onPress={this.props.closeModal}>
-            <Icon name="close" size={24} color={Colors.black}/>
+            <Icon name="close" size={24} color={Colors.white}/>
             
             
             </TouchableOpacity>
             <View style={{alignSelf: "stretch", marginHorizontal: 32}}>
-            <Text style={styles.title}>Create Cart</Text>
+            <Text style={styles.title}>Create Card</Text>
             <TextInput style={styles.input} placeholder="Name" placeholderTextColor=" rgba(255, 255, 255, 0.5)" onChangeText={text=> this.setState({name: text})}/>
             <View style={{flexDirection:"row", justifyContent: "space-between", marginTop: 12}}>
             {this.renderColor()}

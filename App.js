@@ -15,7 +15,8 @@ import {
 import tempData from './tempData';
 import ToDoList from './components/toDoList';
 import AddListModal from './components/AddListModal';
-import Fire from './Fire'
+import Fire from './Fire';
+
 export default class App extends React.Component{
   state = {
     addTodoVisible: false,
@@ -28,7 +29,7 @@ export default class App extends React.Component{
       if(error) {
         return alert("Errore")
       }
-
+ 
       firebase.getLists(lists=> {
         this.setState({lists, user}, ()=>{
 this.setState({loading: false})
@@ -51,16 +52,14 @@ this.setState({loading: false})
     return <ToDoList list={list}  updateList={this.updateList}/>
   }
   addList = list => {
-this.setState({
-  lists : [...this.state.lists, {...list, id: this.state.lists.lenght+1, todos: []}]
+firebase.addList({
+  name: list.name,
+  color: list.color,
+  todos:[]
 })
   }
   updateList = list => {
-   this.setState({
-     lists :  this.state.lists.map(item=> {
-     return item.id ===list.id ? list : item
-   })
-  })
+   firebase.updateList(list)
   }
   render() {
     if(this.state.loading) {
