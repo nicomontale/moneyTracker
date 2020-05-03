@@ -2,17 +2,19 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
 import colors  from '../Colors';
 import CartModal from './CartModal';
-
+import Icon2 from 'react-native-vector-icons/AntDesign'
 
 export default class toDoList extends React.Component {
     state= { 
         showVisible:false
     }
+    
     toggleVisible() {
         this.setState({
             showVisible: !this.state. showVisible
         })
       }
+    
     render() {
         const list = this.props.list;
         const completedCount = list.todos.filter(todo=> todo.compleated).length;
@@ -25,6 +27,7 @@ export default class toDoList extends React.Component {
             
             </Modal>
             <TouchableOpacity style={[styles.listContainer, {backgroundColor:list.color}]} onPress={()=>this.toggleVisible()}>
+            <Icon2 name="delete" size={15} color='black' style={{width: 18}} onPress={()=> this.props.deleteCard(list)}/>
             <Text style={styles.listTitle} numberOfLines={1}>
             {list.name}
             </Text>

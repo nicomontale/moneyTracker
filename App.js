@@ -12,7 +12,6 @@ import colors from './Colors';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {
 } from 'react-native/Libraries/NewAppScreen';
-import tempData from './tempData';
 import ToDoList from './components/toDoList';
 import AddListModal from './components/AddListModal';
 import Fire from './Fire';
@@ -47,9 +46,12 @@ this.setState({loading: false})
       addTodoVisible: !this.state.addTodoVisible
     })
   }
+  deleteCard= list=> {
+        firebase.deleteCard(list);
+  }
   renderList = (list) => {
 
-    return <ToDoList list={list}  updateList={this.updateList}/>
+    return <ToDoList list={list} deleteCard={this.deleteCard} updateList={this.updateList} />
   }
   addList = list => {
 firebase.addList({

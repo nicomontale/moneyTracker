@@ -17,10 +17,24 @@ export default class CartModal extends Component {
 
        this.props.updateList(list);
     }
+    deleteTransactions = index=> {
+        let list = this.props.list;
+        list.todos.splice(index, 1);
+        this.props.updateList(list);
+     this.setState({
+        total: this.somma()
+     })
+    }
     addTransacions = ()=> {
         let list = this.props.list;
-        list.todos.push({where: this.state.newTodo, title: this.state.newCash, compleated: false})
-        this.props.updateList(list);
+       // if(!list.todos.some(todo=> todo.title === this.state.newTodo)){
+            list.todos.push({where: this.state.newTodo, title: this.state.newCash, compleated: false})
+            this.props.updateList(list);
+        //}
+       
+        
+       
+        
         
         this.setState({newTodo: "", total: this.somma()});
         Keyboard.dismiss();
@@ -50,7 +64,7 @@ export default class CartModal extends Component {
                 <Text style={[styles.todo, {textDecorationLine : transactions.compleated ? "line-through": "none", color: transactions.compleated ? colors.lightgray : colors.black }]}>
                    {transactions.title} €</Text>
                    <Icon name="delete" size={24}
-                color='#39CCCC' style={{width: 32}}/>
+                color='#39CCCC' style={{width: 32}} onPress={()=> this.deleteTransactions(index)}/>
                 </View>
                
                
@@ -87,7 +101,7 @@ export default class CartModal extends Component {
                 <View style={[styles.section, {flex:3}]}>
                 
                 <FlatList data={list.todos} renderItem={({item, index}) => this.renderTransactions(item, index)} 
-                keyExtractor={(_, index)=> index.toString()}
+                keyExtractor={(item)=> item.title}
                 vertical={true}
                 contentContainerStyle={{paddingHorizontal: 32, paddingVertical:64}}
                 showsVerticalScrollIndicator={false}

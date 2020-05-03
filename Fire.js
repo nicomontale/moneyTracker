@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import '@firebase/firestore'
+import { red } from 'color-name';
 var firebaseConfig = {
     apiKey: "AIzaSyBGOilPNPseCx8CkhIyzY2xM_Nc7yDhJLs",
     authDomain: "moneytransactions-601fa.firebaseapp.com",
@@ -47,11 +48,11 @@ class Fire {
     }
     updateList(list) {
         let ref = this.ref;
-        ref.doc(list.id).update(list);
+        ref.doc(list.id).update(list); //aggiorno determinata lista
     }
     addList(list){
-let ref = this.ref;
-ref.add(list);
+       let ref = this.ref; //prendo la referenza di quell 'id
+       ref.add(list); //aggiungola lista
     }    
     get ref() {
         return firebase
@@ -59,6 +60,10 @@ ref.add(list);
         .collection('users')
         .doc(this.userId)
         .collection("lists");
+    }
+    deleteCard(list) {
+        let ref= this.ref;
+        ref.doc(list.id).delete();
     }
     detach() {
         this.unsubscribe();
